@@ -56,9 +56,9 @@ regForm.addEventListener('submit', (e) => {
         isValid = false;
     }
 
-    // Validate photo URL (optional, but must be valid if provided)
-    if (photo && !/^https?:\/\/.+$/.test(photo)) {
-        document.getElementById('err-photo').textContent = 'Please enter a valid URL.';
+    // Validate photo URL (updated)
+    if (photo && !/^https?:\/\/.+\.(png|jpg|jpeg|gif)$/i.test(photo)) {
+        document.getElementById('err-photo').textContent = 'Please enter a valid image URL (e.g., .png, .jpg, .jpeg, .gif).';
         errors.push('Invalid photo URL.');
         isValid = false;
     }
@@ -95,7 +95,7 @@ function addEntry(data) {
     card.className = 'card-person';
     card.setAttribute('data-id', data.id);
     card.innerHTML = `
-        <img src="${data.photo}" alt="Photo of ${data.firstName} ${data.lastName}">
+        <img src="${data.photo}" onerror="this.src='https://placehold.co/128'" alt="Photo of ${data.firstName} ${data.lastName}">
         <div>
             <h3>${data.firstName} ${data.lastName}</h3>
             <p>
